@@ -1,0 +1,436 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <iostream>
+#include <fstream>
+#include <string>
+
+
+using namespace std;
+
+
+class Player {
+public:
+	
+	Player();
+	void setName();
+	void setWeapon();
+	void setRace();
+	void setStyle();
+	void setData();
+	void showData();
+	string get_name();
+	string get_race();
+	string get_style();
+	string get_weapon();
+	int get_power();
+	int get_defence();
+	int get_speed();
+	int get_mind();
+	int get_willpower();
+	int get_HP();
+	int get_MP();
+
+private:
+	string name; 
+	string race;
+	string style;// Style of combat 
+	string weapon;// weapon of choice
+	int Power;
+	int Defence;
+	int Speed;
+	int Mind; // Mental Attack 
+	int Willpower;// Mental Defence
+	int HP;
+	int MP;
+};
+
+Player::Player()  // Constructor initializes member variables
+{
+	Power = 0;
+	Defence = 0;
+	Speed = 0;
+	Mind = 0;
+	Willpower = 0;
+	HP = 0;
+	MP = 0;
+}
+
+void Player::setName()
+{
+	cout << "Please type in your name:";
+	cin >> name;
+	while (name.size() > 50)
+	{
+		cout << "The name is too long, please try again:";
+		cin >> name;
+	}
+}
+
+
+
+void Player::setRace()
+{
+	cout << "Please choose your race ([0] Human, [1] Orc, [2] Fairy):";
+	int choose;
+	cin >> choose;
+	while (choose < 0 || choose > 4)
+	{
+		cout << "The input is invalid, please try again:";
+		cin >> choose;
+	}
+	if (choose == 0)
+	{
+		race = "Human";
+	}
+	else if (choose == 2)
+	{
+		race = "Orc";
+	}
+	else if (choose == 3)
+	{
+		race = "Fairy";
+	}
+
+}
+
+	void Player::setStyle() 
+	{
+		int choose;
+		if (race == "Human")
+		{
+			cout << "Please choose the battle style ([0] Warrior, [1] Ninja, [2] Spellcaster):";
+			cin >> choose;
+			while (choose < 0 || choose > 3)
+			{
+				cout << "The input is invalid, please try again:";
+				cin >> choose;
+			}
+			if (choose == 0)
+			{
+				style = "Warrior(Physical Dominance, Mentally Fragile)";
+			}
+			else if (choose == 1)
+			{
+				style = "Ninja(Leaves No Trace, Balanced)";
+			}
+			else if (choose == 2)
+			{
+				style = "Spellcaster(Magical Master, Physical Pushover)";
+			}
+
+
+		}
+	if (race == "Fairy")
+	{
+		cout << "Please choose the battle style ([0] Warrior, [1] Ninja, [2] Spellcaster):";
+		cin >> choose;
+		while (choose < 0 || choose > 3)
+		{
+			cout << "The input is invalid, please try again:";
+			cin >> choose;
+		}
+		if (choose == 0)
+		{
+			style = "Warrior(Physical Dominance, Mentally Fragile)";
+		}
+		else if (choose == 1)
+		{
+			style = "Ninja(Leaves No Trace, Balanced)";
+		}
+		else if (choose == 2)
+		{
+			style = "Spellcaster(Magical Master, Physical Pushover)";
+		}
+	}
+	if (race == "Orc")
+	{
+		cout << "Please choose the race ([0] Warrior, [1] Ninja, [2] Spellcaster):" << endl;
+		cin >> choose;
+		while (choose < 0 || choose > 3)
+		{
+			cout << "The input is invalid, please try again:";
+			cin >> choose;
+		}
+		if (choose == 0)
+		{
+			style = "Warrior(Physical Dominance, Mentally Fragile)";
+		}
+		else if (choose == 1)
+		{
+			style = "Ninja(Leaves No Trace, Balanced)";
+		}
+		else if (choose == 2)
+		{
+			style = "Spellcaster(Magical Master, Physical Pushover)";
+		}
+	}
+	
+}
+
+void Player::setWeapon()
+{
+	cout << "Please choose your weapon ([0] Greatsword, [1] Katana, [2] Staff):";
+	int choose;
+	cin >> choose;
+	while (choose < 0 || choose > 3)
+	{
+		cout << "The input is invalid, please try again:";
+		cin >> choose;
+	}
+	if (choose == 0)
+	{
+		weapon = "GreatSword";
+	}
+	else if (choose == 1)
+	{
+		weapon = "Katana";
+	}
+	else if (choose == 2)
+	{
+		weapon = "Staff";
+	}
+
+}
+
+
+
+void Player::setData()
+{
+	int rn[100]; // Random array
+		srand((unsigned int)time(NULL));
+	for (int i = 0; i < 99; i++)
+	{
+		rn[i] = rand() % 5 + 1;
+	}
+	
+	
+	if (style == "Ninja")
+	{
+		for (int i = 55; i < 80; i++)
+		{
+			Power += rn[i];
+		}
+		for (int i = 47; i < 61; i++)
+		{
+			Defence += rn[i];
+		}
+		for (int i = 80; i < 99; i++)
+		{
+			Speed += rn[i];
+		}
+		for (int i = 53; i < 72; i++)
+		{
+			Mind += rn[i];
+		}
+		for (int i = 69; i < 82; i++)
+		{
+			Willpower += rn[i];
+		}
+	}
+	if (style == "Swordsman")
+	{
+		for (int i = 80; i < 99; i++)
+		{
+			Power += rn[i];
+		}
+		for (int i = 74; i < 89; i++)
+		{
+			Defence += rn[i];
+		}
+		for (int i = 36; i < 50; i++)
+		{
+			Speed += rn[i];
+		}
+		for (int i = 28; i < 52; i++)
+		{
+			Mind += rn[i];
+		}
+		for (int i = 35; i < 52; i++)
+		{
+			Willpower += rn[i];
+		}
+	}
+	if (style == "Spellcaster")
+	{
+		for (int i = 29; i < 42; i++)
+		{
+			Power += rn[i];
+		}
+		for (int i = 43; i < 57; i++)
+		{
+			Defence += rn[i];
+		}
+		for (int i = 64; i < 79; i++)
+		{
+			Speed += rn[i];
+		}
+		for (int i = 80; i < 99; i++)
+		{
+			Mind += rn[i];
+		}
+		for (int i = 76; i < 93; i++)
+		{
+			Willpower += rn[i];
+		}
+	}
+	int Data[5]; // The array to store 5 basic data
+	Data[0] = Power;
+	Data[1] = Defence;
+	Data[2] = Speed;
+	Data[3] = Mind;
+	Data[4] = Willpower;
+}
+
+	for(int i=0;i<5;i++) //Check if the generated random number is random
+	{
+		cout<<data[i]<<endl;
+	}
+	while (data[0] + data[1] + data[2] + data[3] + data[4] != 100)// +1 the random number in the array until the sum is 100 
+	{
+		int i = rand() % 5 + 1;
+		data[i] += 1;
+	
+		Power = data[0]; // Output the array to the property
+		Defence = data[1];
+		Speed = data[2];
+		Mind = data[3];
+		Willpower = data[4];
+		HP = Power * 20;
+		MP = (Mind + Willpower) * 10;
+	}
+
+void Player::showData()
+{
+	cout << "Name:" << name << endl;
+	cout << "Race:" << race << endl;
+	cout << "Battle Style:" << style << endl;
+	cout << "Weapon: " << weapon << endl;
+	cout << "Power:" << Power << endl;
+	cout << "Defence:" << Defence << endl;
+	cout << "Speed:" << Speed << endl;
+	cout << "Mind" << Mind << endl;
+	cout << "WillPower" << Willpower << endl;
+	cout << "Health:" << HP << endl;
+	cout << "Mana:" << MP << endl;
+}
+
+string Player::get_Name()
+{
+	return name;
+}
+
+string Player::get_Race()
+{
+	return race;
+}
+
+string Player::get_Style()
+{
+	return style;
+}
+
+string Player::get_weapon()
+{
+	return weapon;
+}
+
+string Player::get_power()
+{
+	return power;
+}
+
+ string Player::get_defence()
+{
+	return defence;
+}
+
+ string Player::get_speed()
+{
+	return speed;
+}
+
+string Player::get_mind()
+{
+	return mind;
+}
+
+string Player::get_willpower()
+{
+	return willpower;
+}
+
+string Player::get_HP()
+{
+	return HP;
+}
+
+string Player::get_MP()
+{
+	return MP;
+}
+
+int main()
+{
+
+
+
+	int flag = 1;
+	int choose;
+	while (flag)
+	{
+		Player player;
+		cout << "Create a new game:" << endl;
+		player.setName();
+		player.setRace();
+		player.setStyle();
+		player.setWeapon();
+		player.setData();
+		cout << "   " << endl;
+		cout << "========Please Select=========" << endl;
+		player.showData();
+		cout << "===========================" << endl;
+		cout << "Do you want to save this character? ([0] Yes, [1] No)";
+		cin >> choose;
+		if (choose == 0)
+		{
+			flag = 1;
+		}
+		else if (choose == 1)
+		{
+			ofstream outfile("player.dot");
+			if (!outfile)
+			{
+				cerr << "open player.dot error!";
+			}
+				outfile << "========Your character Stats=========" << endl;
+				outfile << "Name:" << player.get_name() << endl;
+				outfile << "Race:" << player.get_race() << endl;
+				outfile << "Battle Style" << player.get_style() << endl;
+				outfile << "Power:" << player.get_power() << endl;
+				outfile << "Defence:" << player.get_defence() << endl;
+				outfile << "Speed:" << player.get_speed() << endl;
+				outfile << "Mind:" << player.get_mind() << endl;
+				outfile << "Weapon:" << player.get_weapon() << endl;
+				outfile << "Willpower:" << player.get_willpower() << endl;
+				outfile << "Health:" << player.get_HP() << endl;
+				outfile << "Mana:" << player.get_MP() << endl;
+				flag = 0;
+				cout << "saving";/ / Simulate the stored procedure
+					Sleep(1000);
+
+				cout << ".";
+				Sleep(1000);
+				cout << ".";
+				Sleep(1000);
+				cout << "." << endl;
+				Sleep(1000);
+				cout << "Successfully saved!" << endl;
+			
+
+		}
+
+		
+	}
+
+};
